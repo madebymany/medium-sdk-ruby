@@ -32,5 +32,12 @@ module Medium
       response = @client.get 'me'
       Medium::Client.validate response
     end
+
+    def publications
+      user_id = me['data']['id']
+      response = @client.get "users/#{user_id}/publications"
+      @publications = Medium::Client.validate(response)['data']
+    end
+
   end
 end

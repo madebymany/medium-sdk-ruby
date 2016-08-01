@@ -31,8 +31,16 @@ module Medium
     #   }
     #   ```
     def create(user, opts)
-      @client.post "users/#{user['data']['id']}/posts",
+      response = @client.post "users/#{user['data']['id']}/posts",
                    build_request_with(opts)
+      Medium::Client.validate response
+
+    end
+
+    def create_in_publication(publication_id, opts)
+      response = @client.post "publications/#{publication_id}/posts",
+                   build_request_with(opts)
+      Medium::Client.validate response
     end
 
     private
